@@ -6,12 +6,12 @@ import simulator.dataSender.IDataSender;
 
 import java.util.concurrent.ExecutionException;
 
-class Publisher implements Runnable {
+public class Sensor implements Runnable {
 
     private IDataSender _dataSender;
     private IDataGenerator _generator;
 
-    public Publisher(IDataSender dataSender, IDataGenerator generator) {
+    public Sensor(IDataSender dataSender, IDataGenerator generator) {
         _dataSender = dataSender;
         _generator = generator;
     }

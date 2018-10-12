@@ -1,0 +1,9 @@
+[
+  {
+    "type": "temperature",
+    "interval": 10,
+    "generator": "random",
+    "min": -20,
+    "max": 50
+  }
+]

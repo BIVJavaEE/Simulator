@@ -1,11 +1,13 @@
 package simulator.dataSender;
 
+import org.apache.commons.cli.CommandLine;
+
 public abstract class BaseDataSenderFactory {
 
-    protected String[] _args;
+    protected CommandLine _cmd;
 
-    protected BaseDataSenderFactory(String[] args) {
-        _args = args;
+    protected BaseDataSenderFactory(CommandLine cmd) {
+        _cmd = cmd;
     }
 
     abstract public IDataSender create() throws IDataSenderFactoryException;

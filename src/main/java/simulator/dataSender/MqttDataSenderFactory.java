@@ -1,5 +1,7 @@
 package simulator.dataSender;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -16,8 +18,8 @@ public class MqttDataSenderFactory extends BaseDataSenderFactory {
 
     private static final String DefaultMqttConfigPath = "config/mqtt.json";
 
-    public MqttDataSenderFactory(String[] args) {
-        super(args);
+    public MqttDataSenderFactory(CommandLine cmd) {
+        super(cmd);
     }
 
     @Override
@@ -33,9 +35,7 @@ public class MqttDataSenderFactory extends BaseDataSenderFactory {
     }
 
     private Optional<String> getMqttConfigPath() {
-        return _args.length > 0
-                ? Optional.of(_args[0])
-                : Optional.empty();
+        return Optional.ofNullable(_cmd.getOptionValue("mqtt"));
     }
 
     private String readJsonFile() throws IOException {
