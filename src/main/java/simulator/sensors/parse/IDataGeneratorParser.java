@@ -1,4 +1,4 @@
-package simulator.publisher.parse;
+package simulator.sensors.parse;
 
 import org.json.JSONObject;
 import simulator.data.generator.IDataGenerator;

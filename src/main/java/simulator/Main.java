@@ -1,23 +1,37 @@
 package simulator;
 
 import org.apache.commons.cli.*;
-import simulator.dataSender.BaseDataSenderFactory;
-import simulator.dataSender.DataSenderException;
-import simulator.dataSender.IDataSenderFactoryException;
-import simulator.dataSender.MqttDataSenderFactory;
-import simulator.publisher.SensorsCreator;
+import simulator.dataSender.*;
+import simulator.sensors.Sensor;
+import simulator.sensors.SensorScheduler;
+import simulator.sensors.SensorsCreator;
+
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IDataSenderFactoryException, DataSenderException {
         var cmd = getCommandLine(args);
         var dataSender = getDataSenderFactory(cmd).create();
-        dataSender.initialize();
 
-        var publishers = new SensorsCreator(cmd, dataSender).create();
+        System.out.println("Initializing data senders...");
+        dataSender.initialize();
+        System.out.println("Done!");
+
+        System.out.println("Retrieving sensors...");
+        var sensors = new SensorsCreator(cmd, dataSender).create();
+        System.out.println("Done!");
+
+        scheduleSensors(dataSender, sensors);
 
         dataSender.shutdown();
+    }
 
+    private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors) throws DataSenderException {
+        for (var sensor : sensors) {
+            var scheduler = new SensorScheduler(dataSender, sensor, 10);
+            scheduler.start();
+        }
     }
 
     private static BaseDataSenderFactory getDataSenderFactory(CommandLine cmd) throws UnsupportedOperationException {

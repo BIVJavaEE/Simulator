@@ -2,25 +2,18 @@ package simulator.data.generator;
 
 import simulator.data.BaseData;
 import simulator.data.datas.Temperature;
+import simulator.data.generator.helpers.BaseRandomIntGenerator;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class RandomTemperatureGenerator implements IDataGenerator {
-
-    private int _min;
-    private int _max;
+public class RandomTemperatureGenerator extends BaseRandomIntGenerator {
 
     public RandomTemperatureGenerator(int min, int max) {
-        _min = min;
-        _max = max;
+        super(min, max);
     }
 
     @Override
-    public Future<BaseData> generate() {
-        var randomTemperature = ThreadLocalRandom.current().nextInt(_min,_max + 1);
-        return CompletableFuture.completedFuture(new Temperature(randomTemperature));
+    public BaseData generate() {
+        var randomTemperature = getRandomNumber();
+        return new Temperature(randomTemperature);
     }
 
 }

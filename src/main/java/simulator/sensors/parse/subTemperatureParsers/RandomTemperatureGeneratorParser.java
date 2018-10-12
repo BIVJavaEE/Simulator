@@ -1,9 +1,9 @@
-package simulator.publisher.parse.subTemperatureParsers;
+package simulator.sensors.parse.subTemperatureParsers;
 
 import org.json.JSONObject;
 import simulator.data.generator.IDataGenerator;
 import simulator.data.generator.RandomTemperatureGenerator;
-import simulator.publisher.parse.IDataGeneratorParser;
+import simulator.sensors.parse.IDataGeneratorParser;
 
 public class RandomTemperatureGeneratorParser implements IDataGeneratorParser {
 

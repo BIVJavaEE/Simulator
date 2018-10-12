@@ -1,10 +1,9 @@
-package simulator.publisher;
+package simulator.sensors;
 
+import simulator.data.generator.DataGeneratorException;
 import simulator.data.generator.IDataGenerator;
 import simulator.dataSender.DataSenderException;
 import simulator.dataSender.IDataSender;
-
-import java.util.concurrent.ExecutionException;
 
 public class Sensor implements Runnable {
 
@@ -19,10 +18,11 @@ public class Sensor implements Runnable {
     @Override
     public void run() {
         try {
-            var data = _generator.generate().get();
+            var data = _generator.generate();
             var json = data.createJson();
+            System.out.println("Sending " + json);
             _dataSender.send(json);
-        } catch (DataSenderException | InterruptedException | ExecutionException e) {
+        } catch (DataSenderException | DataGeneratorException e) {
             e.printStackTrace();
         }
     }

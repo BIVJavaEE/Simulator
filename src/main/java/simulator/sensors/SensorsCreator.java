@@ -1,11 +1,11 @@
-package simulator.publisher;
+package simulator.sensors;
 
 import org.apache.commons.cli.CommandLine;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import simulator.dataSender.IDataSender;
-import simulator.publisher.parse.IDataGeneratorParser;
-import simulator.publisher.parse.TemperatureParser;
+import simulator.sensors.parse.IDataGeneratorParser;
+import simulator.sensors.parse.TemperatureParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +54,7 @@ public class SensorsCreator {
         var type = jsonObject.get("type").toString();
         switch (type) {
             case "temperature":
-                return new TemperatureParser();
+                return new TemperatureParser(_cmd.getOptionValue("openweatherapikey"));
             default:
                 throw new IllegalArgumentException();
         }

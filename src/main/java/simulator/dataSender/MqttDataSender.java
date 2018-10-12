@@ -19,6 +19,9 @@ public class MqttDataSender implements IDataSender {
     public void send(String data) throws DataSenderException {
         var message = new MqttMessage(data.getBytes());
         try {
+            if (!_mqttClient.isConnected()) {
+                initialize();
+            }
             _mqttClient.publish(_topic, message);
         } catch (MqttException e) {
             throw new DataSenderException();

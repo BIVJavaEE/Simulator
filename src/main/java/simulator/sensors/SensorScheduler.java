@@ -1,6 +1,5 @@
-package simulator.publisher;
+package simulator.sensors;
 
-import simulator.dataSender.DataSenderException;
 import simulator.dataSender.IDataSender;
 
 import java.util.concurrent.Executors;
@@ -20,12 +19,12 @@ public class SensorScheduler {
         _sensor = sensor;
     }
 
-    public void start() throws DataSenderException {
+    public void start() {
         _executor = Executors.newScheduledThreadPool(1);
         _executor.scheduleAtFixedRate(_sensor, 0, _interval, TimeUnit.SECONDS);
     }
 
-    public void stop() throws DataSenderException {
+    public void stop() {
         _executor.shutdown();
     }
 }
