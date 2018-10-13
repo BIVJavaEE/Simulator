@@ -26,7 +26,8 @@ hs_err_pid*
 .idea/workspace.xml
 .idea/usage.statistics.xml
 .idea/tasks.xml
-*/.iml
+*.iml
+out/
 
 # Mac
 .DS_Store

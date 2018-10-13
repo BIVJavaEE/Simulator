@@ -15,6 +15,11 @@
                 <configuration>
                     <source>10</source>
                     <target>10</target>
+                    <archive>
+                        <manifest>
+                            <mainClass>simulator.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
