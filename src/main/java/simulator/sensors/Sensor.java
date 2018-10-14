@@ -8,9 +8,11 @@ import simulator.dataSender.IDataSender;
 public class Sensor implements Runnable {
 
     private IDataSender _dataSender;
+    private int _sensorId;
     private IDataGenerator _generator;
 
-    public Sensor(IDataSender dataSender, IDataGenerator generator) {
+    public Sensor(Integer sensorId, IDataSender dataSender, IDataGenerator generator) {
+        _sensorId = sensorId;
         _dataSender = dataSender;
         _generator = generator;
     }
@@ -18,7 +20,7 @@ public class Sensor implements Runnable {
     @Override
     public void run() {
         try {
-            var data = _generator.generate();
+            var data = _generator.generate(_sensorId);
             var json = data.createJson();
             System.out.println("Sending " + json);
             _dataSender.send(json);

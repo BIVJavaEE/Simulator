@@ -5,6 +5,7 @@ import simulator.data.datas.Pressure;
 import simulator.data.generator.helpers.BaseOpenWeatherGenerator;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
 
@@ -13,10 +14,10 @@ public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
     }
 
     @Override
-    public BaseData generate() throws DataGeneratorException {
+    public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
             var pressure = getPressure();
-            return new Pressure(pressure);
+            return new Pressure(new Timestamp(System.currentTimeMillis()), sensorId, pressure);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }

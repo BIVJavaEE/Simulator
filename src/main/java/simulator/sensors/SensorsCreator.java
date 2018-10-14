@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class SensorsCreator {
 
@@ -62,7 +63,8 @@ public class SensorsCreator {
 
     private Sensor createPublisher(JSONObject jsonObject) {
         var generator = getParser(jsonObject).parse(jsonObject);
-        return new Sensor(_dataSender, generator);
+        var sensorId = jsonObject.getInt("sensorId");
+        return new Sensor(sensorId, _dataSender, generator);
     }
 
 }

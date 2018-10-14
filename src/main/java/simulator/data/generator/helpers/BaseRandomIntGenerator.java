@@ -8,7 +8,7 @@ public abstract class BaseRandomIntGenerator implements IDataGenerator {
 
     private int _min, _max;
 
-    protected BaseRandomIntGenerator(int min, int max) {
+    protected BaseRandomIntGenerator(Integer min, Integer max) {
         _min = min;
         _max = max;
     }

@@ -9,6 +9,7 @@ import simulator.data.datas.Temperature;
 import simulator.data.generator.helpers.BaseOpenWeatherGenerator;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class OpenWeatherTemperatureGenerator extends BaseOpenWeatherGenerator {
 
@@ -17,10 +18,10 @@ public class OpenWeatherTemperatureGenerator extends BaseOpenWeatherGenerator {
     }
 
     @Override
-    public BaseData generate() throws DataGeneratorException {
+    public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
             var temp = getTemperature();
-            return new Temperature(temp);
+            return new Temperature(new Timestamp(System.currentTimeMillis()), sensorId, temp);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }
