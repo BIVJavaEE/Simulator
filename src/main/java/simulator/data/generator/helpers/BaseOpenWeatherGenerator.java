@@ -8,7 +8,7 @@ import simulator.data.generator.IDataGenerator;
 
 import java.io.IOException;
 
-public abstract class BaseOpenWeatherGenerator implements IDataGenerator {
+public abstract class BaseOpenWeatherGenerator extends BaseDataGenerator {
 
     private String _city;
     private String _apiKey;

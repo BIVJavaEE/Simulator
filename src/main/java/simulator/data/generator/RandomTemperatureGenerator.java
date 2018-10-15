@@ -15,7 +15,7 @@ public class RandomTemperatureGenerator extends BaseRandomIntGenerator {
     @Override
     public BaseData generate(Integer sensorId) {
         var randomTemperature = getRandomNumber();
-        return new Temperature(new Timestamp(System.currentTimeMillis()), sensorId, randomTemperature);
+        return new Temperature(getUnixTime(), sensorId, randomTemperature);
     }
 
 }

@@ -21,7 +21,7 @@ public class OpenWeatherTemperatureGenerator extends BaseOpenWeatherGenerator {
     public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
             var temp = getTemperature();
-            return new Temperature(new Timestamp(System.currentTimeMillis()), sensorId, temp);
+            return new Temperature(getUnixTime(), sensorId, temp);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }

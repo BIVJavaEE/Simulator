@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 public abstract class BaseData<TData> {
 
-    private Timestamp _timestamp;
+    private long _timestamp;
     private DataType _type;
     private TData _value;
     private int _sensorId;
     private String _unit;
 
-    protected BaseData(Timestamp timestamp, String unit, int sensorId, DataType type, TData value) {
+    protected BaseData(long timestamp, String unit, int sensorId, DataType type, TData value) {
         _timestamp = timestamp;
         _unit = unit;
         _sensorId = sensorId;
@@ -25,7 +25,7 @@ public abstract class BaseData<TData> {
         jsonObject.put("sensorId", _sensorId);
         jsonObject.put("type", _type.toString());
         jsonObject.put("value", _value);
-        jsonObject.put("timestamp", _timestamp.toString());
+        jsonObject.put("timestamp", _timestamp);
         jsonObject.put("unit", _unit);
         return jsonObject.toString();
     }
@@ -46,11 +46,11 @@ public abstract class BaseData<TData> {
         this._sensorId = _sensorId;
     }
 
-    public Timestamp getTimestamp() {
+    public long getTimestamp() {
         return _timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(long timestamp) {
         _timestamp = timestamp;
     }
 

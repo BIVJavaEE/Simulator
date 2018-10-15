@@ -4,7 +4,7 @@ import simulator.data.generator.IDataGenerator;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class BaseRandomIntGenerator implements IDataGenerator {
+public abstract class BaseRandomIntGenerator extends BaseDataGenerator {
 
     private int _min, _max;
 
