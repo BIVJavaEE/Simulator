@@ -1,5 +1,6 @@
 package simulator.data.generator;
 
+import org.json.JSONObject;
 import simulator.data.BaseData;
 import simulator.data.datas.Pressure;
 import simulator.data.generator.helpers.BaseOpenWeatherGenerator;
@@ -16,7 +17,7 @@ public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
     @Override
     public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
-            var pressure = getPressure();
+            int pressure = getPressure();
             return new Pressure(getUnixTime(), sensorId, pressure);
         } catch (IOException e) {
             throw new DataGeneratorException();
@@ -24,8 +25,8 @@ public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
     }
 
     private int getPressure() throws IOException {
-        var jsonObject = getJsonObject();
-        var mainJsonObject = jsonObject.getJSONObject("main");
+        JSONObject jsonObject = getJsonObject();
+        JSONObject mainJsonObject = jsonObject.getJSONObject("main");
         return mainJsonObject.getInt("pressure");
     }
 

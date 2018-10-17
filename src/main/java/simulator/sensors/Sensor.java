@@ -1,5 +1,6 @@
 package simulator.sensors;
 
+import simulator.data.BaseData;
 import simulator.data.generator.DataGeneratorException;
 import simulator.data.generator.IDataGenerator;
 import simulator.dataSender.DataSenderException;
@@ -20,8 +21,8 @@ public class Sensor implements Runnable {
     @Override
     public void run() {
         try {
-            var data = _generator.generate(_sensorId);
-            var json = data.createJson();
+            BaseData data = _generator.generate(_sensorId);
+            String json = data.createJson();
             System.out.println("Sending " + json);
             _dataSender.send(json);
         } catch (DataSenderException | DataGeneratorException e) {

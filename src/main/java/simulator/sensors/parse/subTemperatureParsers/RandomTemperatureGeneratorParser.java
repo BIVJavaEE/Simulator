@@ -9,8 +9,8 @@ public class RandomTemperatureGeneratorParser implements IDataGeneratorParser {
 
     @Override
     public IDataGenerator parse(JSONObject jsonObject) {
-        var min = jsonObject.getInt("min");
-        var max = jsonObject.getInt("max");
+        int min = jsonObject.getInt("min");
+        int max = jsonObject.getInt("max");
         return new RandomTemperatureGenerator(min, max);
     }
 

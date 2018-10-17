@@ -1,25 +1,33 @@
 package simulator;
 
 import org.apache.commons.cli.*;
+import org.json.JSONObject;
+import simulator.config.ConfigService;
 import simulator.dataSender.*;
 import simulator.sensors.Sensor;
 import simulator.sensors.SensorScheduler;
 import simulator.sensors.SensorsCreator;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
-    public static void main(String[] args) throws IDataSenderFactoryException, DataSenderException {
-        var cmd = getCommandLine(args);
-        var dataSender = getDataSenderFactory(cmd).create();
+    public static void main(String[] args) throws IDataSenderFactoryException, DataSenderException, IOException {
+        CommandLine cmd = getCommandLine(args);
+        Optional<String> configFilePath = Optional.ofNullable(cmd.getOptionValue("config"));
+        ConfigService configService = new ConfigService(configFilePath.orElse("config/config.json"));
+        JSONObject config = configService.get();
+
+        IDataSender dataSender = getDataSenderFactory(config).create();
 
         System.out.println("Initializing data senders...");
         dataSender.initialize();
         System.out.println("Done!");
 
         System.out.println("Retrieving sensors...");
-        var sensors = new SensorsCreator(cmd, dataSender).create();
+        List<Sensor> sensors = new SensorsCreator(config.getJSONArray("sensors"), dataSender, config.getString("openweatherapikey")).create();
         System.out.println("Done!");
 
         scheduleSensors(dataSender, sensors);
@@ -27,18 +35,18 @@ public class Main {
         dataSender.shutdown();
     }
 
-    private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors) throws DataSenderException {
-        for (var sensor : sensors) {
-            var scheduler = new SensorScheduler(dataSender, sensor, 10);
+    private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors) {
+        for (Sensor sensor : sensors) {
+            SensorScheduler scheduler = new SensorScheduler(dataSender, sensor, 10);
             scheduler.start();
         }
     }
 
-    private static BaseDataSenderFactory getDataSenderFactory(CommandLine cmd) throws UnsupportedOperationException {
-        var mode = cmd.getOptionValue("mode");
+    private static BaseDataSenderFactory getDataSenderFactory(JSONObject config) throws UnsupportedOperationException {
+        String mode = config.getString("mode");
         switch (mode) {
             case "mqtt":
-                return new MqttDataSenderFactory(cmd);
+                return new MqttDataSenderFactory(config.getJSONObject("mqtt"));
             case "http":
                 throw new UnsupportedOperationException();
             default:
@@ -57,23 +65,11 @@ public class Main {
     }
 
     private static Options createOptions() {
-        var options = new Options();
+        Options options = new Options();
 
-        var modeOption = new Option("mode", true, "Publish mode (mqtt or http)");
-        modeOption.setRequired(true);
-        options.addOption(modeOption);
-
-        var mqttOption = new Option("mqtt", true, "Path to the MQTT config");
+        Option mqttOption = new Option("c", "config", true, "Path to the config config");
         mqttOption.setRequired(false);
         options.addOption(mqttOption);
-
-        var openWeatherApiKeyOption = new Option("openweatherapikey", true, "Open weather API key");
-        openWeatherApiKeyOption.setRequired(false);
-        options.addOption(openWeatherApiKeyOption);
-
-        var sensorsOption = new Option("sensors", true, "Sensors");
-        sensorsOption.setRequired(true);
-        options.addOption(sensorsOption);
 
         return options;
     }

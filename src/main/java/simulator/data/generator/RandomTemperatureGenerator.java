@@ -4,8 +4,6 @@ import simulator.data.BaseData;
 import simulator.data.datas.Temperature;
 import simulator.data.generator.helpers.BaseRandomIntGenerator;
 
-import java.sql.Timestamp;
-
 public class RandomTemperatureGenerator extends BaseRandomIntGenerator {
 
     public RandomTemperatureGenerator(Integer min, Integer max) {
@@ -14,7 +12,7 @@ public class RandomTemperatureGenerator extends BaseRandomIntGenerator {
 
     @Override
     public BaseData generate(Integer sensorId) {
-        var randomTemperature = getRandomNumber();
+        int randomTemperature = getRandomNumber();
         return new Temperature(getUnixTime(), sensorId, randomTemperature);
     }
 

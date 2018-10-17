@@ -17,7 +17,7 @@ public class MqttDataSender implements IDataSender {
 
     @Override
     public void send(String data) throws DataSenderException {
-        var message = new MqttMessage(data.getBytes());
+        MqttMessage message = new MqttMessage(data.getBytes());
         try {
             if (!_mqttClient.isConnected()) {
                 initialize();
@@ -47,7 +47,7 @@ public class MqttDataSender implements IDataSender {
     }
 
     private static MqttConnectOptions getMqttConnectOption() {
-        var mqttConnectOptions = new MqttConnectOptions();
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setCleanSession(true);
         return mqttConnectOptions;
     }

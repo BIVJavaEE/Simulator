@@ -1,6 +1,10 @@
 package simulator.data.generator.helpers;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
@@ -23,9 +27,9 @@ public abstract class BaseOpenWeatherGenerator extends BaseDataGenerator {
     }
 
     private String getApiResponse() throws IOException {
-        var request = new HttpGet(getUrl());
-        var client = HttpClientBuilder.create().build();
-        var response = client.execute(request);
+        HttpUriRequest request = new HttpGet(getUrl());
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse response = client.execute(request);
         return new BasicResponseHandler().handleResponse(response);
     }
 

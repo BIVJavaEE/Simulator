@@ -21,7 +21,7 @@ public abstract class BaseData<TData> {
     }
 
     public String createJson() {
-        var jsonObject = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         jsonObject.put("sensorId", _sensorId);
         jsonObject.put("type", _type.toString());
         jsonObject.put("value", _value);

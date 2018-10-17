@@ -1,0 +1,30 @@
+{
+  "mode": "mqtt",
+  "mqtt": {
+    "broker": "tcp://ouaz.me",
+    "clientId": "simulator",
+    "topic": "measures"
+  },
+  "openweatherapikey": "5d6e70d1dca0350b61fa48f92399370f",
+  "sensors": [
+    {
+      "type": "temperature",
+      "generator": "random",
+      "sensorId": 0,
+      "min": -20,
+      "max": 50
+    },
+    {
+      "type": "temperature",
+      "generator": "openweathermapapi",
+      "sensorId": 1,
+      "city": "Nantes"
+    },
+    {
+      "type": "temperature",
+      "generator": "openweathermapapi",
+      "sensorId": 2,
+      "city": "Casablanca"
+    }
+  ]
+}

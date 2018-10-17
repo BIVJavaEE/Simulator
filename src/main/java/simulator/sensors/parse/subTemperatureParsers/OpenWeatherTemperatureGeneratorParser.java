@@ -15,7 +15,7 @@ public class OpenWeatherTemperatureGeneratorParser implements IDataGeneratorPars
 
     @Override
     public IDataGenerator parse(JSONObject jsonObject) {
-        var city = jsonObject.get("city").toString();
+        String city = jsonObject.get("city").toString();
         return new OpenWeatherTemperatureGenerator(city, _apiKey);
     }
 }

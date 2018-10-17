@@ -15,7 +15,7 @@ public class TemperatureParser implements IDataGeneratorParser {
 
     @Override
     public IDataGenerator parse(JSONObject jsonObject) {
-        var generator = jsonObject.get("generator").toString();
+        String generator = jsonObject.get("generator").toString();
         IDataGeneratorParser subParser;
         switch (generator) {
             case "random":
