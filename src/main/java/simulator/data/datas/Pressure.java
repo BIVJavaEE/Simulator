@@ -5,6 +5,6 @@ import simulator.data.DataType;
 
 public class Pressure extends BaseData<Integer> {
     public Pressure(long timestamp, Integer sensorId, Integer value) {
-        super(timestamp, "", sensorId, DataType.PRESSURE, value);
+        super(timestamp, "pa", sensorId, DataType.PRESSURE, value);
     }
 }

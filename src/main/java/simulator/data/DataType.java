@@ -3,7 +3,8 @@ package simulator.data;
 public enum DataType {
 
     TEMPERATURE("temperature"),
-    PRESSURE("pressure");
+    PRESSURE("pressure"),
+    WINDSPEED("windspeed");
 
     private String _typeString;
 

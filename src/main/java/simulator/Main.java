@@ -32,7 +32,16 @@ public class Main {
 
         scheduleSensors(dataSender, sensors);
 
-        dataSender.shutdown();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Shutting down data sender...");
+            try {
+                dataSender.shutdown();
+            } catch (DataSenderException e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("Done !");
+            }
+        }));
     }
 
     private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors) {
@@ -48,7 +57,7 @@ public class Main {
             case "mqtt":
                 return new MqttDataSenderFactory(config.getJSONObject("mqtt"));
             case "http":
-                throw new UnsupportedOperationException();
+                return new HttpDataSenderFactory(config.getJSONObject("http"));
             default:
                 throw new IllegalArgumentException(mode);
         }

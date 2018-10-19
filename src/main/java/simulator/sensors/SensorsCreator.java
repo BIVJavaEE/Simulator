@@ -5,10 +5,10 @@ import org.json.JSONObject;
 import simulator.data.generator.IDataGenerator;
 import simulator.dataSender.IDataSender;
 import simulator.sensors.parse.IDataGeneratorParser;
+import simulator.sensors.parse.PressureParser;
 import simulator.sensors.parse.TemperatureParser;
+import simulator.sensors.parse.WindSpeedParser;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +35,10 @@ public class SensorsCreator {
         switch (type) {
             case "temperature":
                 return new TemperatureParser(_openWeatherApiKey);
+            case "pressure":
+                return new PressureParser(_openWeatherApiKey);
+            case "windspeed":
+                return new WindSpeedParser(_openWeatherApiKey);
             default:
                 throw new IllegalArgumentException();
         }

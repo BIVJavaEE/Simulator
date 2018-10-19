@@ -1,5 +1,0 @@
-{
-  "broker": "tcp://ouaz.me",
-  "clientId": "simulator",
-  "topic": "measures"
-}

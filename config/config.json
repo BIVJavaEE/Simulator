@@ -1,19 +1,15 @@
 {
-  "mode": "mqtt",
+  "mode": "http",
   "mqtt": {
     "broker": "tcp://ouaz.me",
     "clientId": "simulator",
     "topic": "measures"
   },
+  "http": {
+    "api": "http://ouaz.me:8080/publishServer/sensor"
+  },
   "openweatherapikey": "5d6e70d1dca0350b61fa48f92399370f",
   "sensors": [
-    {
-      "type": "temperature",
-      "generator": "random",
-      "sensorId": 0,
-      "min": -20,
-      "max": 50
-    },
     {
       "type": "temperature",
       "generator": "openweathermapapi",
@@ -21,7 +17,31 @@
       "city": "Nantes"
     },
     {
+      "type": "pressure",
+      "generator": "openweathermapapi",
+      "sensorId": "1",
+      "city": "Nantes"
+    },
+    {
+      "type": "windspeed",
+      "generator": "openweathermapapi",
+      "sensorId": 1,
+      "city": "Nantes"
+    },
+    {
       "type": "temperature",
+      "generator": "openweathermapapi",
+      "sensorId": 2,
+      "city": "Casablanca"
+    },
+    {
+      "type": "pressure",
+      "generator": "openweathermapapi",
+      "sensorId": 2,
+      "city": "Casablanca"
+    },
+    {
+      "type": "windspeed",
       "generator": "openweathermapapi",
       "sensorId": 2,
       "city": "Casablanca"

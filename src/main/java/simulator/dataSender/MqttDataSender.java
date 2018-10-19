@@ -19,9 +19,7 @@ public class MqttDataSender implements IDataSender {
     public void send(String data) throws DataSenderException {
         MqttMessage message = new MqttMessage(data.getBytes());
         try {
-            if (!_mqttClient.isConnected()) {
-                initialize();
-            }
+            checkConnection();
             _mqttClient.publish(_topic, message);
         } catch (MqttException e) {
             throw new DataSenderException();
@@ -30,17 +28,24 @@ public class MqttDataSender implements IDataSender {
 
     @Override
     public void initialize() throws DataSenderException {
-        try {
-            _mqttClient.connect(getMqttConnectOption());
-        } catch (MqttException e) {
-            throw new DataSenderException();
-        }
+        checkConnection();
     }
 
     @Override
     public void shutdown() throws DataSenderException {
         try {
             _mqttClient.disconnect();
+            _mqttClient.close();
+        } catch (MqttException e) {
+            throw new DataSenderException();
+        }
+    }
+
+    private void checkConnection() throws DataSenderException {
+        try {
+            if (!_mqttClient.isConnected()) {
+                _mqttClient.connect(getMqttConnectOption());
+            }
         } catch (MqttException e) {
             throw new DataSenderException();
         }
