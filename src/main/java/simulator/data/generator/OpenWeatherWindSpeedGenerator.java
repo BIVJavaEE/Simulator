@@ -17,7 +17,7 @@ public class OpenWeatherWindSpeedGenerator extends BaseOpenWeatherGenerator {
     public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
             float windSpeed = getWindSpeed();
-            return new WindSpeed(getUnixTime(), sensorId, windSpeed);
+            return new WindSpeed(sensorId, windSpeed);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }

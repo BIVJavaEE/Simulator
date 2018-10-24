@@ -13,7 +13,7 @@ public class RandomTemperatureGenerator extends BaseRandomIntGenerator {
     @Override
     public BaseData generate(Integer sensorId) {
         int randomTemperature = getRandomNumber();
-        return new Temperature(getUnixTime(), sensorId, randomTemperature);
+        return new Temperature(sensorId, randomTemperature);
     }
 
 }

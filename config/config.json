@@ -19,31 +19,31 @@
     {
       "type": "pressure",
       "generator": "openweathermapapi",
-      "sensorId": "1",
+      "sensorId": 2,
       "city": "Nantes"
     },
     {
       "type": "windspeed",
       "generator": "openweathermapapi",
-      "sensorId": 1,
+      "sensorId": 3,
       "city": "Nantes"
     },
     {
       "type": "temperature",
       "generator": "openweathermapapi",
-      "sensorId": 2,
+      "sensorId": 4,
       "city": "Casablanca"
     },
     {
       "type": "pressure",
       "generator": "openweathermapapi",
-      "sensorId": 2,
+      "sensorId": 5,
       "city": "Casablanca"
     },
     {
       "type": "windspeed",
       "generator": "openweathermapapi",
-      "sensorId": 2,
+      "sensorId": 6,
       "city": "Casablanca"
     }
   ]

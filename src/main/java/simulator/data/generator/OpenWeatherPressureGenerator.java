@@ -18,7 +18,7 @@ public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
     public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
             int pressure = getPressure();
-            return new Pressure(getUnixTime(), sensorId, pressure);
+            return new Pressure(sensorId, pressure);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }
