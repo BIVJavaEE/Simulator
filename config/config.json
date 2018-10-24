@@ -13,38 +13,82 @@
     {
       "type": "temperature",
       "generator": "openweathermapapi",
-      "sensorId": 1,
-      "city": "Nantes"
+      "sensorId": 0,
+      "city": "Nantes",
+      "latitude": 47.205541,
+      "longitude": -1.566923
     },
     {
       "type": "pressure",
       "generator": "openweathermapapi",
-      "sensorId": 2,
-      "city": "Nantes"
+      "sensorId": 1,
+      "city": "Nantes",
+      "latitude": 47.217838,
+      "longitude": -1.537736
     },
     {
       "type": "windspeed",
       "generator": "openweathermapapi",
+      "sensorId": 2,
+      "city": "Nantes",
+      "latitude": 47.182146,
+      "longitude": -1.519409
+    },
+    {
+      "type": "winddirection",
+      "generator": "openweathermapapi",
       "sensorId": 3,
-      "city": "Nantes"
+      "city": "Nantes",
+      "latitude": 47.224721,
+      "longitude": -1.629246
     },
     {
       "type": "temperature",
       "generator": "openweathermapapi",
       "sensorId": 4,
-      "city": "Casablanca"
+      "city": "Casablanca",
+      "latitude": 47.190210,
+      "longitude": -1.614462
     },
     {
       "type": "pressure",
       "generator": "openweathermapapi",
       "sensorId": 5,
-      "city": "Casablanca"
+      "city": "Casablanca",
+      "latitude": 47.244668,
+      "longitude": -1.579106
     },
     {
       "type": "windspeed",
       "generator": "openweathermapapi",
       "sensorId": 6,
-      "city": "Casablanca"
+      "city": "Casablanca",
+      "latitude": 47.247928,
+      "longitude": -1.551106
+    },
+    {
+      "type": "winddirection",
+      "generator": "openweathermapapi",
+      "sensorId": 7,
+      "city": "Casablanca",
+      "latitude": 47.223562,
+      "longitude": -1.581857
+    },
+    {
+      "type": "temperature",
+      "generator": "openweathermapapi",
+      "sensorId": 8,
+      "city": "Casablanca",
+      "latitude": 47.232185,
+      "longitude": -1.548198
+    },
+    {
+      "type": "pressure",
+      "generator": "openweathermapapi",
+      "sensorId": 9,
+      "city": "Casablanca",
+      "latitude": 47.217580,
+      "longitude": -1.495841
     }
   ]
 }
