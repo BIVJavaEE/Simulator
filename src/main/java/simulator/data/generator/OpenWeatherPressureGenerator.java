@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 
 public class OpenWeatherPressureGenerator extends BaseOpenWeatherGenerator {
 
-    public OpenWeatherPressureGenerator(String city, String apiKey) {
-        super(city, apiKey);
+    public OpenWeatherPressureGenerator(int latitude, int longitude, String apiKey) {
+        super(latitude, longitude, apiKey);
     }
 
     @Override

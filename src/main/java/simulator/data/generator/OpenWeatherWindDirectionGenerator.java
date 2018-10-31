@@ -2,31 +2,31 @@ package simulator.data.generator;
 
 import org.json.JSONObject;
 import simulator.data.BaseData;
-import simulator.data.datas.Temperature;
+import simulator.data.datas.WindDirection;
 import simulator.data.generator.helpers.BaseOpenWeatherGenerator;
 
 import java.io.IOException;
 
-public class OpenWeatherTemperatureGenerator extends BaseOpenWeatherGenerator {
+public class OpenWeatherWindDirectionGenerator extends BaseOpenWeatherGenerator {
 
-    public OpenWeatherTemperatureGenerator(int latitude, int longitude, String apiKey) {
+    public OpenWeatherWindDirectionGenerator(int latitude, int longitude, String apiKey) {
         super(latitude, longitude, apiKey);
     }
 
     @Override
     public BaseData generate(Integer sensorId) throws DataGeneratorException {
         try {
-            int temp = getTemperature();
-            return new Temperature(sensorId, temp);
+            float windDirection = getWindDirection();
+            return new WindDirection(sensorId, windDirection);
         } catch (IOException e) {
             throw new DataGeneratorException();
         }
+
     }
 
-    private int getTemperature() throws IOException {
+    private float getWindDirection() throws IOException {
         JSONObject jsonObject = getJsonObject();
-        JSONObject mainJsonObject = jsonObject.getJSONObject("main");
-        return mainJsonObject.getInt("temp") - 273;
+        JSONObject windObject = jsonObject.getJSONObject("wind");
+        return windObject.getFloat("deg");
     }
-
 }

@@ -4,7 +4,8 @@ public enum DataType {
 
     TEMPERATURE("temperature"),
     PRESSURE("pressure"),
-    WINDSPEED("windspeed");
+    WINDSPEED("windspeed"),
+    WINDDIRECTION("winddirection");
 
     private String _typeString;
 

@@ -14,11 +14,13 @@ import java.io.IOException;
 
 public abstract class BaseOpenWeatherGenerator extends BaseDataGenerator {
 
-    private String _city;
+    private int _latitude;
+    private int _longitude;
     private String _apiKey;
 
-    public BaseOpenWeatherGenerator(String city, String apiKey) {
-        _city = city;
+    public BaseOpenWeatherGenerator(int latitude, int longitude, String apiKey) {
+        _latitude = latitude;
+        _longitude = longitude;
         _apiKey = apiKey;
     }
 
@@ -34,8 +36,9 @@ public abstract class BaseOpenWeatherGenerator extends BaseDataGenerator {
     }
 
     private String getUrl() {
-        return "http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api}"
-                .replace("{city}", _city)
+        return "http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api}"
+                .replace("{latitude}", Integer.toString(_latitude))
+                .replace("{longitude}", Integer.toString(_longitude))
                 .replace("{api}", _apiKey);
     }
 }

@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class OpenWeatherWindSpeedGenerator extends BaseOpenWeatherGenerator {
 
-    public OpenWeatherWindSpeedGenerator(String city, String apiKey) {
-        super(city, apiKey);
+    public OpenWeatherWindSpeedGenerator(int latitude, int longitude, String apiKey) {
+        super(latitude, longitude, apiKey);
     }
 
     @Override

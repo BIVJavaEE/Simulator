@@ -1,32 +1,17 @@
 package simulator.sensors.parse;
 
-import org.json.JSONObject;
 import simulator.data.generator.IDataGenerator;
-import simulator.sensors.parse.subTemperatureParsers.OpenWeatherTemperatureGeneratorParser;
-import simulator.sensors.parse.subTemperatureParsers.RandomTemperatureGeneratorParser;
+import simulator.data.generator.OpenWeatherTemperatureGenerator;
 
-public class TemperatureParser implements IDataGeneratorParser {
+public class TemperatureParser extends BaseOpenWeatherGeneratorParser {
 
-    private String _openWeatherApiKey;
-
-    public TemperatureParser(String openWeatherApiKey) {
-        _openWeatherApiKey = openWeatherApiKey;
+    public TemperatureParser(String apiKey) {
+        super(apiKey);
     }
 
     @Override
-    public IDataGenerator parse(JSONObject jsonObject) {
-        String generator = jsonObject.get("generator").toString();
-        IDataGeneratorParser subParser;
-        switch (generator) {
-            case "random":
-                subParser = new RandomTemperatureGeneratorParser();
-                break;
-            case "openweathermapapi":
-                subParser = new OpenWeatherTemperatureGeneratorParser(_openWeatherApiKey);
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-        return subParser.parse(jsonObject);
+    protected IDataGenerator parseOpenWeatherGenerator(int latitude, int longitude) {
+        return new OpenWeatherTemperatureGenerator(latitude, longitude, _apiKey);
     }
+
 }
