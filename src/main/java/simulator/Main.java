@@ -46,7 +46,7 @@ public class Main {
 
     private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors, int delay) {
         for (Sensor sensor : sensors) {
-            SensorScheduler scheduler = new SensorScheduler(dataSender, sensor, 60 * 5);
+            SensorScheduler scheduler = new SensorScheduler(dataSender, sensor, delay);
             scheduler.start();
         }
     }
