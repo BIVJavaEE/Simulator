@@ -1,4 +1,5 @@
 {
+  "delay": 300,
   "mode": "http",
   "mqtt": {
     "broker": "tcp://ouaz.me",

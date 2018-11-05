@@ -30,7 +30,7 @@ public class Main {
         List<Sensor> sensors = new SensorsCreator(config.getJSONArray("sensors"), dataSender, config.getString("openweatherapikey")).create();
         System.out.println("Done!");
 
-        scheduleSensors(dataSender, sensors);
+        scheduleSensors(dataSender, sensors, config.getInt("delay"));
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutting down data sender...");
@@ -44,9 +44,9 @@ public class Main {
         }));
     }
 
-    private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors) {
+    private static void scheduleSensors(IDataSender dataSender, List<Sensor> sensors, int delay) {
         for (Sensor sensor : sensors) {
-            SensorScheduler scheduler = new SensorScheduler(dataSender, sensor, 10);
+            SensorScheduler scheduler = new SensorScheduler(dataSender, sensor, 60 * 5);
             scheduler.start();
         }
     }
